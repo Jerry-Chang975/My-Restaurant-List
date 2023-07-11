@@ -14,7 +14,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/restaurants', (req, res) => {
-  res.render('index', { restaurants });
+  const keyword = req.query.keyword;
+  const matchedRestaurants = keyword
+    ? restaurants.filter((restaurant) => {
+        // check name, category, description properties of restaurant
+        const checkKey = ['name', 'category', 'description'];
+        return Object.keys(restaurant).some((key) => {
+          if (checkKey.includes(key)) {
+            return restaurant[key]
+              .toLowerCase()
+              .includes(keyword.toLowerCase());
+          } else {
+            return false;
+          }
+        });
+      })
+    : restaurants;
+  res.render('index', { restaurants: matchedRestaurants, keyword });
 });
 
 app.get('/restaurants/:id', (req, res) => {
@@ -26,5 +42,5 @@ app.get('/restaurants/:id', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`The restaurant app listening on http://localhost:${port}`);
+  console.log(`The restaurant app is listening on http://localhost:${port}`);
 });
