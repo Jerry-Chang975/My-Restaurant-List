@@ -53,6 +53,8 @@ header {
 
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin: 2rem;
 }
 
 .card img {
@@ -63,6 +65,11 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.card-footer a {
+  font-size: 0.5rem;
+  margin: 0.1rem;
 }
 
 .restaurant-category {
