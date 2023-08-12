@@ -16,7 +16,7 @@ header {
   margin: -5px;
   height: 360px;
   background: #dddddd center center
-    url('https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg');
+    url("https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg");
   background-size: cover;
   filter: blur(3px);
 }
@@ -54,7 +54,7 @@ header {
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
-  margin: 2rem;
+  margin: 0.5rem;
 }
 
 .card img {
@@ -86,7 +86,7 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
   .card img {
     height: 115px;
   }
@@ -102,4 +102,4 @@ header {
   .card img {
     height: auto;
   }
-}
+} */
