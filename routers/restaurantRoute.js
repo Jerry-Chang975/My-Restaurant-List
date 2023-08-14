@@ -6,6 +6,8 @@ router.get('/', restaurantController.getAllRestaurants);
 
 router.get('/:id', restaurantController.getRestaurantById);
 
+router.get('/:id/edit', restaurantController.getRestaurantEditPage);
+
 router.post('/', restaurantController.createRestaurant);
 
 router.put('/:id', restaurantController.updateRestaurant);
