@@ -47,9 +47,15 @@
 </div>
 <!-- restaurant list -->
 <div class='container mt-5' style='max-width: 1000px'>
-  <div class='d-flex justify-contents-center flex-wrap'>
+  <a href='/create'><img
+      id='add-restaurant'
+      src='/imgs/add.png'
+      alt='add-new-restaurant'
+    />
+  </a>
+  <div class='d-flex justify-content-start flex-wrap'>
     {{#each restaurants as |restaurant|}}
-      <div class='card mb-3 mx-auto'>
+      <div class='card mb-3'>
         <a href='/{{restaurant.id}}'><img
             class='card-img-top'
             src='{{restaurant.image}}'
@@ -80,7 +86,9 @@
             type='button'
             class='btn btn-warning'
           >Edit</a>
-          <a type='button' class='btn btn-danger'>Delete</a>
+          <form action='/{{restaurant.id}}?_method=DELETE' method='post'>
+            <button type='submit' class='btn btn-danger'>Delete</button>
+          </form>
         </div>
       </div>
     {{/each}}

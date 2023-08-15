@@ -57,14 +57,30 @@ function updateRestaurant(req, res) {
     .catch((err) => console.log(err));
 }
 
-function createRestaurant(req, res) {}
+function getRestaurantCreatePage(req, res) {
+  res.render('create');
+}
 
-function deleteRestaurant(req, res) {}
+function createRestaurant(req, res) {
+  return Restaurant.create(req.body.name)
+    .then(res.redirect('/'))
+    .catch((err) => console.log(err));
+}
+
+function deleteRestaurant(req, res) {
+  const { id } = req.params;
+  return Restaurant.destroy({ where: { id } })
+    .then((result) => {
+      res.redirect('/');
+    })
+    .catch((err) => console.log(err));
+}
 
 module.exports = {
   getAllRestaurants,
   getRestaurantById,
   getRestaurantEditPage,
+  getRestaurantCreatePage,
   updateRestaurant,
   createRestaurant,
   deleteRestaurant,
