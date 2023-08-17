@@ -1,7 +1,32 @@
 const db = require('../models');
 const Restaurant = db.Restaurant;
 function getAllRestaurants(req, res) {
-  return Restaurant.findAll({ raw: true })
+  const { keyword } = req.query;
+  // condition search if keyword is not empty
+  Restaurant.findAll({
+    raw: true,
+    where: keyword
+      ? {
+          [db.Sequelize.Op.or]: [
+            {
+              name: {
+                [db.Sequelize.Op.like]: `%${keyword}%`,
+              },
+            },
+            {
+              name_en: {
+                [db.Sequelize.Op.like]: `%${keyword}%`,
+              },
+            },
+            {
+              category: {
+                [db.Sequelize.Op.like]: `%${keyword}%`,
+              },
+            },
+          ],
+        }
+      : {},
+  })
     .then((restaurants) => {
       res.render('index', { restaurants });
     })
@@ -9,7 +34,6 @@ function getAllRestaurants(req, res) {
       console.log(err);
     });
 }
-
 function getRestaurantById(req, res) {
   const { id } = req.params;
   return Restaurant.findByPk(id, { raw: true })
@@ -62,9 +86,13 @@ function getRestaurantCreatePage(req, res) {
 }
 
 function createRestaurant(req, res) {
-  return Restaurant.create(req.body.name)
-    .then(res.redirect('/'))
-    .catch((err) => console.log(err));
+  console.log({ ...req.body });
+  return Restaurant.create({ ...req.body })
+    .then((result) => res.redirect('/'))
+    .catch((err) => {
+      console.log(err);
+      res.render('create', { restaurant: { ...req.body } });
+    });
 }
 
 function deleteRestaurant(req, res) {

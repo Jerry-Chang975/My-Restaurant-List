@@ -23,7 +23,7 @@
 <div class='container search-bar'>
   <div class='search-bar-outer'>
     <div class='search-bar-inner'>
-      <form action='/restaurants'>
+      <form action='/'>
         <h4 class='mb-2'>尋找餐廳：</h4>
         <div class='input-group'>
           <input
@@ -51,9 +51,10 @@
       id='add-restaurant'
       src='/imgs/add.png'
       alt='add-new-restaurant'
+      title='新增餐廳'
     />
   </a>
-  <div class='d-flex justify-content-start flex-wrap'>
+  <div id='restaurant-container' class='d-flex justify-content-start flex-wrap'>
     {{#each restaurants as |restaurant|}}
       <div class='card mb-3'>
         <a href='/{{restaurant.id}}'><img
@@ -86,7 +87,11 @@
             type='button'
             class='btn btn-warning'
           >Edit</a>
-          <form action='/{{restaurant.id}}?_method=DELETE' method='post'>
+          <form
+            class='remove-restaurant'
+            action='/{{restaurant.id}}?_method=DELETE'
+            method='post'
+          >
             <button type='submit' class='btn btn-danger'>Delete</button>
           </form>
         </div>
@@ -94,3 +99,11 @@
     {{/each}}
   </div>
 </div>
+
+<script>
+  const restaurantContainer = document.querySelector('#restaurant-container');
+  restaurantContainer.addEventListener('submit', (event) => { if
+  (event.target.classList.contains('remove-restaurant')) {
+  event.preventDefault(); event.stopPropagation(); if (confirm('確定要刪除嗎?'))
+  { event.target.submit(); } } });
+</script>

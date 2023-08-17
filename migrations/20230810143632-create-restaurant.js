@@ -7,46 +7,46 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       name_en: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       category: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000),
       },
       location: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000),
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       google_map: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000),
       },
       rating: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Restaurants');
-  }
+  },
 };

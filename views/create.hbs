@@ -17,9 +17,11 @@
   </nav>
   <div class='banner'></div>
 </header>
-<h1 class='mb-1 restaurant-show-title'>編輯餐廳內容</h1>
+<h1 class='mb-1 restaurant-show-title'>新增餐廳內容</h1>
 <div class='container'>
-  <form action='/' method='post'><div class='row'>
+  <form action='/' method='post' class='needs-validation' novalidate><div
+      class='row'
+    >
       <div class='card'>
         <div class='card-body'>
           <div class='row mb-2'>
@@ -34,7 +36,13 @@
                 name='name'
                 id='name'
                 value='{{restaurant.name}}'
+                maxlength='200'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳名稱!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -49,7 +57,13 @@
                 name='name_en'
                 id='name_en'
                 value='{{restaurant.name_en}}'
+                maxlength='200'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳英文名稱!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -64,7 +78,13 @@
                 name='category'
                 id='category'
                 value='{{restaurant.category}}'
+                maxlength='50'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳類別!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -79,7 +99,13 @@
                 name='location'
                 id='location'
                 value='{{restaurant.location}}'
+                maxlength='200'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳地址!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -94,7 +120,13 @@
                 name='google_map'
                 id='google_map'
                 value='{{restaurant.google_map}}'
+                maxlength='200'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳在Google地圖上的短網址!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -108,7 +140,13 @@
                 name='image'
                 id='image'
                 value='{{restaurant.image}}'
+                maxlength='200'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳圖片的URL連結!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -123,7 +161,13 @@
                 name='phone'
                 id='phone'
                 value='{{restaurant.phone}}'
+                maxlength='20'
+                required
               />
+
+              <div class='invalid-feedback'>
+                請輸入餐廳的聯絡電話!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -141,7 +185,11 @@
                 name='rating'
                 id='rating'
                 value='{{restaurant.rating}}'
+                required
               />
+              <div class='invalid-feedback'>
+                請輸入餐廳評價!
+              </div>
             </div>
           </div>
           <div class='row mb-2'>
@@ -155,7 +203,11 @@
                 id='description'
                 cols='30'
                 rows='10'
+                required
               ></textarea>
+              <div class='invalid-feedback'>
+                請輸入餐廳簡介!
+              </div>
             </div>
           </div>
         </div>
@@ -165,5 +217,6 @@
         </div>
       </div>
     </div></form>
-
 </div>
+
+<script src='/js/script.js'></script>
