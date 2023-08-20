@@ -61,6 +61,7 @@
                 id='name_en'
                 value='{{restaurant.name_en}}'
                 maxlength='200'
+                pattern='^[A-Za-z\s]+$'
                 required
               />
 
@@ -124,6 +125,7 @@
                 id='google_map'
                 value='{{restaurant.google_map}}'
                 maxlength='200'
+                pattern='^[(http||https)]://[a-zA-Z0-9\./_]+'
                 required
               />
 
@@ -144,6 +146,7 @@
                 id='image'
                 value='{{restaurant.image}}'
                 maxlength='200'
+                pattern='^[(http||https)]://[a-zA-Z0-9\./_]+'
                 required
               />
 
@@ -165,6 +168,7 @@
                 id='phone'
                 value='{{restaurant.phone}}'
                 maxlength='20'
+                pattern='[0-9\s]+'
                 required
               />
 
