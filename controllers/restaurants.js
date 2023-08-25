@@ -1,7 +1,8 @@
 const db = require('../models');
 const Restaurant = db.Restaurant;
+const sortOptions = ['name', 'name', 'category', 'location'];
 function getAllRestaurants(req, res) {
-  const { keyword } = req.query;
+  const { keyword, sort } = req.query;
   // condition search if keyword is not empty
   Restaurant.findAll({
     raw: true,
@@ -26,9 +27,15 @@ function getAllRestaurants(req, res) {
           ],
         }
       : {},
+    order: [
+      [
+        sort ? sortOptions[Number(sort)] : 'name',
+        sort === '1' ? 'DESC' : 'ASC',
+      ],
+    ],
   })
     .then((restaurants) => {
-      res.render('index', { restaurants });
+      res.render('index', { restaurants, keyword, sort });
     })
     .catch((err) => {
       console.log(err);

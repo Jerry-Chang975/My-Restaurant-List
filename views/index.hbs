@@ -14,16 +14,25 @@
         />
         我的餐廳清單
       </a>
+      <a href='/create'><img
+          id='add-restaurant'
+          src='/imgs/add.png'
+          alt='add-new-restaurant'
+          title='新增餐廳'
+        />
+      </a>
     </div>
+
   </nav>
 
   <div class='banner'></div>
 </header>
-<!-- search bar -->
+
 <div class='container search-bar'>
-  <div class='search-bar-outer'>
-    <div class='search-bar-inner'>
-      <form action='/'>
+  <form action='/' method='get'>
+    <!-- search bar -->
+    <div class='search-bar-outer'>
+      <div class='search-bar-inner'>
         <h4 class='mb-2'>尋找餐廳：</h4>
         <div class='input-group'>
           <input
@@ -41,19 +50,26 @@
               ></i></button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
+    {{! sort selector }}
+    <select
+      id='sort-selector'
+      name='sort'
+      class='form-select'
+      aria-label='sort selector'
+    >
+      <option value='0' {{#ifEquals sort 0}}selected{{/ifEquals}}>A to Z</option>
+      <option value='1' {{#ifEquals sort 1}}selected{{/ifEquals}}>Z to A</option>
+      <option value='2' {{#ifEquals sort 2}}selected{{/ifEquals}}>類別</option>
+      <option value='3' {{#ifEquals sort 3}}selected{{/ifEquals}}>地區</option>
+    </select>
+  </form>
+
 </div>
+
 <!-- restaurant list -->
 <div class='container mt-5' style='max-width: 1000px'>
-  <a href='/create'><img
-      id='add-restaurant'
-      src='/imgs/add.png'
-      alt='add-new-restaurant'
-      title='新增餐廳'
-    />
-  </a>
   <div id='restaurant-container' class='d-flex justify-content-start flex-wrap'>
     {{#each restaurants as |restaurant|}}
       <div class='card mb-3'>
@@ -100,10 +116,4 @@
   </div>
 </div>
 
-<script>
-  const restaurantContainer = document.querySelector('#restaurant-container');
-  restaurantContainer.addEventListener('submit', (event) => { if
-  (event.target.classList.contains('remove-restaurant')) {
-  event.preventDefault(); event.stopPropagation(); if (confirm('確定要刪除嗎?'))
-  { event.target.submit(); } } });
-</script>
+<script src='js/index-script.js'></script>

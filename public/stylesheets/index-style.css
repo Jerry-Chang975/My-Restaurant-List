@@ -91,9 +91,14 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+#sort-selector {
+  width: 10rem;
+  margin-left: auto;
+  margin-top: 1rem;
+}
+
 #add-restaurant {
-  position: fixed;
-  width: 5rem;
+  width: 4rem;
   height: auto;
   right: 30px;
   bottom: 30px;
@@ -101,7 +106,6 @@ header {
 }
 
 #add-restaurant:hover {
-  width: 6rem;
   animation: shockAnimation 0.1s 6 alternate;
 }
 
@@ -118,4 +122,3 @@ header {
     transform: rotateZ(5deg);
   }
 }
-
