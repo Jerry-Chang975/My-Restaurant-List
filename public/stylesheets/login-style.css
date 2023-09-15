@@ -1,0 +1,65 @@
+header {
+  overflow: hidden;
+}
+
+body {
+  background-image: url('https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.navbar .navbar-brand {
+  color: #4592af;
+}
+
+.navbar .navbar-brand:hover {
+  color: #226089;
+}
+
+.banner {
+  position: relative;
+  z-index: -1;
+  margin: -5px;
+  height: 360px;
+  background: #dddddd center center
+    url('https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg');
+  background-size: cover;
+  filter: blur(3px);
+}
+
+.btn-major {
+  background-color: #9b4b4b;
+  color: white;
+}
+
+.restaurant-category {
+  color: #666666;
+  font-size: 0.8rem;
+}
+
+.restaurant-show-title {
+  position: relative;
+  top: -100px;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.center-vertical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+.login-container {
+  background: rgba(255, 255, 255, 0.5); /* 使用rgba来设置背景颜色和透明度 */
+  border-radius: 10px; /* 可以根据需要调整边框圆角的大小 */
+  padding: 20px; /* 添加一些内边距来增加内容与边框之间的间距 */
+}
+
+@media screen and (max-width: 768px) {
+  .restaurant-show-title {
+    font-size: 2rem;
+  }
+}
