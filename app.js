@@ -14,11 +14,13 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+// template engine setting
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
 app.use(express.static('public'));
 
+// data parsing setting
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 

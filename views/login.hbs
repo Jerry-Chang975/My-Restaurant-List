@@ -19,25 +19,27 @@
 
 <div class='center-vertical'>
   <div class='w-25 mx-auto my-auto login-container'>
-    <form>
+    <form action='/user/login' method='POST'>
       <h1 class='h3 mb-3 fw-normal'>Please login</h1>
       <div class='form-floating'>
         <input
           type='email'
           class='form-control'
-          id='floatingInput'
+          id='email'
+          name='email'
           placeholder='name@example.com'
         />
-        <label for='floatingInput'>Email address</label>
+        <label for='email'>Email address</label>
       </div>
       <div class='form-floating mt-2'>
         <input
           type='password'
           class='form-control'
-          id='floatingPassword'
+          id='password'
+          name='password'
           placeholder='Password'
         />
-        <label for='floatingPassword'>Password</label>
+        <label for='password'>Password</label>
       </div>
 
       <div class='form-check text-start my-3'>

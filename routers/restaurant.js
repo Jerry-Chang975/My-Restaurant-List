@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const restaurantController = require('../controllers/restaurants');
 
-router.get('/', restaurantController.getAllRestaurants);
+router.get('/', restaurantController.getRestaurantsByUser);
 
 router.get('/create', restaurantController.getRestaurantCreatePage);
 

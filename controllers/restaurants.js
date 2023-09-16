@@ -1,7 +1,7 @@
 const db = require('../models');
 const Restaurant = db.Restaurant;
 const sortOptions = ['name', 'name', 'category', 'location'];
-function getAllRestaurants(req, res) {
+function getRestaurantsByUser(req, res) {
   const { keyword, sort } = req.query;
   // condition search if keyword is not empty
   Restaurant.findAll({
