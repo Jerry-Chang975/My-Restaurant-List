@@ -4,10 +4,6 @@ const LocalStrategy = require('passport-local');
 const db = require('../models');
 const User = db.User;
 
-passport.deserializeUser((user, done) => {
-  done(null, { id: user.id });
-});
-
 // local strategy
 passport.use(
   new LocalStrategy(
@@ -17,7 +13,7 @@ passport.use(
     async (username, password, done) => {
       try {
         let user = await User.findOne({
-          attributes: ['id', 'email', 'password'],
+          attributes: ['id', 'name', 'email', 'password'],
           where: { email: username },
           raw: true,
         });
@@ -29,7 +25,7 @@ passport.use(
           ? done(null, user)
           : done(null, false, { message: 'Incorrect email or password.' });
       } catch (error) {
-        err.errorMessage = 'login failed';
+        error.errorMessage = 'login failed';
         done(error);
       }
     }
@@ -39,6 +35,10 @@ passport.use(
 passport.serializeUser((user, done) => {
   const { id, name, email } = user;
   return done(null, { id, name, email });
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, { id: user.id, name: user.name, email: user.email });
 });
 
 module.exports = passport;

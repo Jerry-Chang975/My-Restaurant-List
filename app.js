@@ -7,6 +7,10 @@ const { engine } = require('express-handlebars');
 require('./utils/handlebarsHelper');
 const methodOverride = require('method-override');
 
+const flash = require('connect-flash');
+const errorHandler = require('./middlewares/error-handler');
+const messageHandler = require('./middlewares/message-handler');
+
 const session = require('express-session');
 const passport = require('passport');
 
@@ -33,10 +37,16 @@ app.use(
   })
 );
 
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(messageHandler);
+
 app.use('/', router);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`The restaurant app is listening on http://localhost:${port}`);

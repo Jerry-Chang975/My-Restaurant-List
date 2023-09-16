@@ -3,6 +3,7 @@ const Restaurant = db.Restaurant;
 const sortOptions = ['name', 'name', 'category', 'location'];
 function getRestaurantsByUser(req, res) {
   const { keyword, sort } = req.query;
+  console.log(req.user);
   // condition search if keyword is not empty
   Restaurant.findAll({
     raw: true,
@@ -35,7 +36,7 @@ function getRestaurantsByUser(req, res) {
     ],
   })
     .then((restaurants) => {
-      res.render('index', { restaurants, keyword, sort });
+      res.render('index', { restaurants, keyword, sort, user: req.user });
     })
     .catch((err) => {
       console.log(err);
@@ -112,7 +113,7 @@ function deleteRestaurant(req, res) {
 }
 
 module.exports = {
-  getAllRestaurants,
+  getRestaurantsByUser,
   getRestaurantById,
   getRestaurantEditPage,
   getRestaurantCreatePage,

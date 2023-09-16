@@ -1,35 +1,9 @@
 <link rel='stylesheet' href='/stylesheets/index-style.css' />
 
-<header>
-  <!-- navigation -->
-  <nav class='navbar navbar-light bg-light'>
-    <div class='container'>
-      <a class='navbar-brand' href='/'>
-        <img
-          src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png'
-          width='30'
-          height='30'
-          class='d-inline-block align-top'
-          alt='我的餐廳清單'
-        />
-        我的餐廳清單
-      </a>
-      <a href='/create'><img
-          id='add-restaurant'
-          src='/imgs/add.png'
-          alt='add-new-restaurant'
-          title='新增餐廳'
-        />
-      </a>
-    </div>
-
-  </nav>
-
-  <div class='banner'></div>
-</header>
+{{> navbar}}
 
 <div class='container search-bar'>
-  <form action='/' method='get'>
+  <form action='/restaurants' method='get'>
     <!-- search bar -->
     <div class='search-bar-outer'>
       <div class='search-bar-inner'>
@@ -105,7 +79,7 @@
           >Edit</a>
           <form
             class='remove-restaurant'
-            action='/{{restaurant.id}}?_method=DELETE'
+            action='/restaurants/{{restaurant.id}}?_method=DELETE'
             method='post'
           >
             <button type='submit' class='btn btn-danger'>Delete</button>
