@@ -1,40 +1,51 @@
 # Restaurant List
 
-![Restaurant home page](./public/imgs/restaurant_screencut.jpg)
+![Restaurant home page](./public/imgs/new-home-page.png)
+![Restaurant login page](./public/imgs/login-page.png)
 
-- A web app that you can find some restaurants and search them with keywords.
-- You can also add new, update, remove your restaurant list
+## User Story
+
+This web application allows you to:
+
+1. Discover restaurants and search for them using keywords.
+2. Add, update, and remove restaurants from your list.
+3. Register an account using the default system or log in with your Facebook account to manage your restaurant data.
 
 ## Getting Started
 
-> Ensure `Node.js` and `MySQL` is installed on your machine
+> Make sure `Node.js` and `MySQL` is installed on your machine
+
+### Installation
 
 1. Clone the repo
 
    ```bash
-   $ git clone https://github.com/Jerry-Chang975/My-Restaurant-List.git
+   git clone https://github.com/Jerry-Chang975/My-Restaurant-List.git
    ```
 
 2. Go to the project directory
 
    ```bash
-   $ cd My-Restaurant-List
+   cd My-Restaurant-List
    ```
 
 3. Install the required npm packages
 
    ```bash
-   $ npm install
+   npm install
    ```
 
-4. Create config.json in config folder
+### Database Configuration
+
+1. Create config.json in config folder, your can refer config.example.json
 
    ```
    ├──config
-       └──config.json
+       ├──config.json
+       └──config.example.json
    ```
 
-   You have to set db connection parameters in config.json
+   You have to set database connection parameters in config.json
 
    ```json
    {
@@ -42,32 +53,38 @@
        "username": "your username",
        "password": "your password",
        "database": "restaurant",
-       "host": "127.0.0.1",
+       "host": "your host",
        "dialect": "mysql"
      }
    }
    ```
 
-5. Create new db in your MySQL server
+2. Create new database in your MySQL server
 
    ```MySQL
    CREATE DATABASE `restaurant`
    ```
 
-6. Run DB migrations
+3. Run database migrations
 
    ```bash
    npx sequelize db:migrate
    ```
 
-7. Add seed data
+4. Add seed data
 
    ```bash
    npx sequelize db:seed:all
    ```
 
-8. Start the web app
+### OAuth2 App Configuration
 
-   ```bash
-   $ npm run start
-   ```
+1.  GO to [Meta for Developers](https://developers.facebook.com/apps) to set up the OAuth2 configurations for your app.
+
+2.  After creating the app, copy the App ID and App Key to your .env file (you need to create this file yourself).
+
+### Start the Web App
+
+```bash
+$ npm run start
+```
