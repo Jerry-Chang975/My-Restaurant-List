@@ -100,9 +100,6 @@ header {
 #add-restaurant {
   width: 4rem;
   height: auto;
-  right: 30px;
-  bottom: 30px;
-  z-index: 2;
 }
 
 #add-restaurant:hover {

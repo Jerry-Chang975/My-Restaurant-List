@@ -3,7 +3,7 @@
   <!-- navigation -->
   <nav class='navbar navbar-light bg-light'>
     <div class='container'>
-      <a class='navbar-brand' href='/'>
+      <a class='navbar-brand' href='/restaurants'>
         <img
           src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png'
           width='30'
@@ -119,13 +119,12 @@
             </div>
             <div class='col-8'>
               <input
-                type='text'
+                type='url'
                 class='form-control'
                 name='google_map'
                 id='google_map'
                 value='{{restaurant.google_map}}'
                 maxlength='200'
-                pattern='^(http|https):\/\/[a-zA-Z0-9\.\/_]+'
                 required
               />
 
@@ -140,13 +139,12 @@
             </div>
             <div class='col-8'>
               <input
-                type='text'
+                type='url'
                 class='form-control'
                 name='image'
                 id='image'
                 value='{{restaurant.image}}'
                 maxlength='200'
-                pattern='^(http|https):\/\/[a-zA-Z0-9\.\/_]+'
                 required
               />
 

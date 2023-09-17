@@ -1,4 +1,5 @@
 const db = require('../models');
+const { Op } = require('sequelize');
 const Restaurant = db.Restaurant;
 const sortOptions = ['name', 'name', 'category', 'location'];
 function getRestaurantsByUser(req, res) {
@@ -9,25 +10,32 @@ function getRestaurantsByUser(req, res) {
     raw: true,
     where: keyword
       ? {
-          [db.Sequelize.Op.or]: [
+          [Op.and]: [
             {
-              name: {
-                [db.Sequelize.Op.like]: `%${keyword}%`,
-              },
+              [Op.or]: [
+                {
+                  name: {
+                    [Op.like]: `%${keyword}%`,
+                  },
+                },
+                {
+                  name_en: {
+                    [Op.like]: `%${keyword}%`,
+                  },
+                },
+                {
+                  category: {
+                    [Op.like]: `%${keyword}%`,
+                  },
+                },
+              ],
             },
             {
-              name_en: {
-                [db.Sequelize.Op.like]: `%${keyword}%`,
-              },
-            },
-            {
-              category: {
-                [db.Sequelize.Op.like]: `%${keyword}%`,
-              },
+              userId: req.user.id,
             },
           ],
         }
-      : {},
+      : { userId: req.user.id },
     order: [
       [
         sort ? sortOptions[Number(sort)] : 'name',
@@ -45,14 +53,37 @@ function getRestaurantsByUser(req, res) {
 function getRestaurantById(req, res) {
   const { id } = req.params;
   return Restaurant.findByPk(id, { raw: true })
-    .then((restaurant) => res.render('detail', { restaurant }))
-    .catch((err) => console.log(err));
+    .then((restaurant) => {
+      if (!restaurant) {
+        req.flash('error', 'Restaurant not found');
+        return res.redirect('/restaurants');
+      }
+      if (restaurant.userId !== req.user.id) {
+        req.flash('error', 'You are not authorized to view this restaurant');
+        return res.redirect('/restaurants');
+      }
+      return res.render('detail', { restaurant });
+    })
+    .catch((err) => {
+      console.log(err);
+      err.errorMessage = 'restaurant not found';
+    });
 }
 
 function getRestaurantEditPage(req, res) {
   const { id } = req.params;
   return Restaurant.findByPk(id, { raw: true })
-    .then((restaurant) => res.render('edit', { restaurant }))
+    .then((restaurant) => {
+      if (!restaurant) {
+        req.flash('error', 'Restaurant not found');
+        return res.redirect('/restaurants');
+      }
+      if (restaurant.userId !== req.user.id) {
+        req.flash('error', 'You are not authorized to edit this restaurant');
+        return res.redirect('/restaurants');
+      }
+      return res.render('edit', { restaurant });
+    })
     .catch((err) => console.log(err));
 }
 
@@ -69,24 +100,34 @@ function updateRestaurant(req, res) {
     rating,
     description,
   } = req.body;
-  return Restaurant.update(
-    {
-      name,
-      name_en,
-      category,
-      location,
-      google_map,
-      image,
-      phone,
-      rating,
-      description,
-    },
-    { where: { id } }
-  )
-    .then((result) => {
-      res.redirect(`/${id}`);
-    })
-    .catch((err) => console.log(err));
+  return Restaurant.findByPk(id, { raw: true }).then((restaurant) => {
+    if (!restaurant) {
+      req.flash('error', 'Restaurant not found');
+      return res.redirect('/restaurants');
+    }
+    if (restaurant.userId !== req.user.id) {
+      req.flash('error', 'You are not authorized to edit this restaurant');
+      return res.redirect('/restaurants');
+    }
+    Restaurant.update(
+      {
+        name,
+        name_en,
+        category,
+        location,
+        google_map,
+        image,
+        phone,
+        rating,
+        description,
+      },
+      { where: { id } }
+    )
+      .then((result) => {
+        res.redirect(`/restaurants/${id}`);
+      })
+      .catch((err) => console.log(err));
+  });
 }
 
 function getRestaurantCreatePage(req, res) {
@@ -95,8 +136,11 @@ function getRestaurantCreatePage(req, res) {
 
 function createRestaurant(req, res) {
   console.log({ ...req.body });
-  return Restaurant.create({ ...req.body })
-    .then((result) => res.redirect('/'))
+  return Restaurant.create({ ...req.body, userId: req.user.id })
+    .then((result) => {
+      res.redirect(`/restaurants/${result.id}`);
+      console.log(result);
+    })
     .catch((err) => {
       console.log(err);
       res.render('create', { restaurant: { ...req.body } });
@@ -105,11 +149,21 @@ function createRestaurant(req, res) {
 
 function deleteRestaurant(req, res) {
   const { id } = req.params;
-  return Restaurant.destroy({ where: { id } })
-    .then((result) => {
-      res.redirect('/');
-    })
-    .catch((err) => console.log(err));
+  return Restaurant.findByPk(id, { raw: true }).then((restaurant) => {
+    if (!restaurant) {
+      req.flash('error', 'Restaurant not found');
+      return res.redirect('/restaurants');
+    }
+    if (restaurant.userId !== req.user.id) {
+      req.flash('error', 'You are not authorized to remove this restaurant');
+      return res.redirect('/restaurants');
+    }
+    Restaurant.destroy({ where: { id } })
+      .then((result) => {
+        res.redirect('/restaurants');
+      })
+      .catch((err) => console.log(err));
+  });
 }
 
 module.exports = {

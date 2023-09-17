@@ -2,6 +2,15 @@
 
 {{> navbar}}
 
+<div class="position-fixed end-0 me-2" style="z-index: 1;">
+  <a href='/restaurants/create'><img
+     id='add-restaurant'
+     src='/imgs/add.png'
+     alt='add-new-restaurant'
+     title='新增餐廳'
+   />
+  </a>
+</div>
 <div class='container search-bar'>
   <form action='/restaurants' method='get'>
     <!-- search bar -->
@@ -47,7 +56,7 @@
   <div id='restaurant-container' class='d-flex justify-content-start flex-wrap'>
     {{#each restaurants as |restaurant|}}
       <div class='card mb-3'>
-        <a href='/{{restaurant.id}}'><img
+        <a href='/restaurants/{{restaurant.id}}'><img
             class='card-img-top'
             src='{{restaurant.image}}'
             alt='{{restaurant.name}}'
@@ -68,12 +77,12 @@
         </div>
         <div class='card-footer d-flex justify-content-end'>
           <a
-            href='/{{restaurant.id}}'
+            href='/restaurants/{{restaurant.id}}'
             type='button'
             class='btn btn-primary'
           >Detail</a>
           <a
-            href='/{{restaurant.id}}/edit'
+            href='/restaurants/{{restaurant.id}}/edit'
             type='button'
             class='btn btn-warning'
           >Edit</a>

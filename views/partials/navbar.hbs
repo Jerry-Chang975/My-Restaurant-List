@@ -2,7 +2,7 @@
   <!-- navigation -->
   <nav class='navbar navbar-light bg-light'>
     <div class='container'>
-      <a class='navbar-brand' href='/'>
+      <a class='navbar-brand' href='/restaurants'>
         <img
           src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png'
           width='30'
@@ -12,19 +12,19 @@
         />
         我的餐廳清單
       </a>
-      <div class='d-flex align-items-center'>
+      <form
+        class='d-flex align-items-center my-auto'
+        action='/users/logout'
+        method='POST'
+      >
         <span class='navbar-brand me-3' style='cursor: default'>
           Welcome,
           {{user.name}}
         </span>
-        <a href='/create'><img
-            id='add-restaurant'
-            src='/imgs/add.png'
-            alt='add-new-restaurant'
-            title='新增餐廳'
-          />
-        </a>
-      </div>
+        <button class='btn btn-outline-primary' type='submit'>
+          登出
+        </button>
+      </form>
     </div>
 
   </nav>
