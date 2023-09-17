@@ -4,7 +4,6 @@ const Restaurant = db.Restaurant;
 const sortOptions = ['name', 'name', 'category', 'location'];
 function getRestaurantsByUser(req, res) {
   const { keyword, sort } = req.query;
-  console.log(req.user);
   // condition search if keyword is not empty
   Restaurant.findAll({
     raw: true,
@@ -64,9 +63,8 @@ function getRestaurantById(req, res) {
       }
       return res.render('detail', { restaurant, user: req.user });
     })
-    .catch((err) => {
-      console.log(err);
-      err.errorMessage = 'restaurant not found';
+    .catch((error) => {
+      console.log(error);
     });
 }
 
@@ -135,11 +133,9 @@ function getRestaurantCreatePage(req, res) {
 }
 
 function createRestaurant(req, res) {
-  console.log({ ...req.body });
   return Restaurant.create({ ...req.body, userId: req.user.id })
     .then((result) => {
       res.redirect(`/restaurants/${result.id}`);
-      console.log(result);
     })
     .catch((err) => {
       console.log(err);

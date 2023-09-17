@@ -60,9 +60,18 @@
           Remember me
         </label>
       </div>
-      <button class='btn btn-primary w-100 py-2' type='submit'>
+      <button class='btn btn-success w-100 py-2' type='submit'>
         login
       </button>
+      <hr />
+      <a
+        class='btn btn-primary w-100 py-2'
+        href='/users/login/facebook'
+        type='button'
+      >
+        <i class='fab fa-facebook-f p-1'></i>
+        Login with Facebook
+      </a>
       <p class='mt-2'>
         New to here?
         <a href='/users/register'>Sign Up</a>
@@ -72,28 +81,16 @@
 </div>
 
 <script>
-  const rememberMe = document.querySelector('#rememberMe');
-  const email = document.querySelector('#email');
-  window.addEventListener('load', ()=>{
-    rememberMe.checked = localStorage.getItem('rememberMe') === 'true'? true: false;
-    email.value = localStorage.getItem('email') || '';
-  })
-  const form = document.querySelector('form');
-  form.addEventListener('submit', function (event) {
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    form.classList.add('was-validated'); // 標記表單已驗證
-
-  
-  if (rememberMe.checked) {
-    localStorage.setItem('email', document.querySelector('#email').value);
-    localStorage.setItem('rememberMe', 'true');
-  } else {
-    localStorage.removeItem('email');
-    localStorage.setItem('rememberMe', 'false');
-  }
-  });
+  const rememberMe = document.querySelector('#rememberMe'); const email =
+  document.querySelector('#email'); window.addEventListener('load', ()=>{
+  rememberMe.checked = localStorage.getItem('rememberMe') === 'true'? true:
+  false; email.value = localStorage.getItem('email') || ''; }) const form =
+  document.querySelector('form'); form.addEventListener('submit', function
+  (event) { if (!form.checkValidity()) { event.preventDefault();
+  event.stopPropagation(); } form.classList.add('was-validated'); //
+  標記表單已驗證 if (rememberMe.checked) { localStorage.setItem('email',
+  document.querySelector('#email').value); localStorage.setItem('rememberMe',
+  'true'); } else { localStorage.removeItem('email');
+  localStorage.setItem('rememberMe', 'false'); } });
 
 </script>

@@ -5,6 +5,7 @@ const passport = require('passport');
 const db = require('../models');
 const User = db.User;
 
+// local login
 router.get('/login', (req, res) => {
   res.render('login');
 });
@@ -51,5 +52,20 @@ router.post('/logout', (req, res) => {
     return res.redirect('/users/login');
   });
 });
+
+// facebook login
+router.get(
+  '/login/facebook',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
+
+router.get(
+  '/oauth2/redirect/facebook',
+  passport.authenticate('facebook', {
+    successRedirect: '/restaurants',
+    failureRedirect: '/users/login',
+    failureFlash: true,
+  })
+);
 
 module.exports = router;
