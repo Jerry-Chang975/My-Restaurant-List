@@ -62,7 +62,7 @@ function getRestaurantById(req, res) {
         req.flash('error', 'You are not authorized to view this restaurant');
         return res.redirect('/restaurants');
       }
-      return res.render('detail', { restaurant });
+      return res.render('detail', { restaurant, user: req.user });
     })
     .catch((err) => {
       console.log(err);
@@ -82,7 +82,7 @@ function getRestaurantEditPage(req, res) {
         req.flash('error', 'You are not authorized to edit this restaurant');
         return res.redirect('/restaurants');
       }
-      return res.render('edit', { restaurant });
+      return res.render('edit', { restaurant, user: req.user });
     })
     .catch((err) => console.log(err));
 }
@@ -131,7 +131,7 @@ function updateRestaurant(req, res) {
 }
 
 function getRestaurantCreatePage(req, res) {
-  res.render('create');
+  res.render('create', { user: req.user });
 }
 
 function createRestaurant(req, res) {
@@ -143,7 +143,7 @@ function createRestaurant(req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render('create', { restaurant: { ...req.body } });
+      res.render('create', { restaurant: { ...req.body }, user: req.user });
     });
 }
 

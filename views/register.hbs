@@ -1,0 +1,121 @@
+<link rel='stylesheet' href='/stylesheets/login-style.css' />
+<header>
+  <!-- navigation -->
+  <nav class='navbar navbar-light bg-light'>
+    <div class='container'>
+      <a class='navbar-brand' href='/'>
+        <img
+          src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png'
+          width='30'
+          height='30'
+          class='d-inline-block align-top'
+          alt='我的餐廳清單'
+        />
+        我的餐廳清單
+      </a>
+    </div>
+  </nav>
+</header>
+<div class='center-vertical'>
+  <div class='w-50 mx-auto my-auto login-container' style='min-width: 450px;'>
+    <form
+      action='/users/register'
+      method='POST'
+      class='needs-validation'
+      novalidate
+    >
+      <h1 class='h3 mb-3 fw-normal'>Sign Up</h1>
+      <div class='row'>
+        <div class='row mb-2'>
+          <div class='col-4 my-auto'>
+            <i class='fas fa-envelope'></i>
+            Email：
+          </div>
+          <div class='col-8'>
+            <input
+              type='email'
+              class='form-control'
+              name='email'
+              id='email'
+              maxlength='200'
+              placeholder='you@example.com'
+              required
+            />
+            <div class='invalid-feedback'>
+              請輸入正確Email!
+            </div>
+          </div>
+        </div>
+        <div class='row mb-2'>
+          <div class='col-4 my-auto'>
+            <i class='fas fa-user'></i>
+            Name：
+          </div>
+          <div class='col-8'>
+            <input
+              type='text'
+              class='form-control'
+              name='name'
+              id='name'
+              maxlength='200'
+              placeholder='your name'
+            />
+          </div>
+        </div>
+        <div class='row mb-2'>
+          <div class='col-4'>
+            <i class='fas fa-lock'></i>
+            密碼：
+          </div>
+          <div class='col-8'>
+            <input
+              type='password'
+              class='form-control'
+              name='password'
+              id='password'
+              maxlength='200'
+              pattern='^(?=.*[a-z])(?=.*[A-Z]).{8,}$'
+              placeholder='至少8碼英數字(包含1個大寫與小寫字母)'
+              required
+            />
+            <div class='invalid-feedback'>
+              密碼不符合規則!
+            </div>
+          </div>
+
+        </div>
+        <div class='row mb-2'>
+          <div class='col-4'>
+            <i class='fas fa-lock'></i>
+            密碼確認：
+          </div>
+          <div class='col-8'>
+            <input
+              type='password'
+              class='form-control'
+              name='confirmPassword'
+              id='confirmPassword'
+              maxlength='200'
+              pattern='^(?=.*[a-z])(?=.*[A-Z]).{8,}$'
+              placeholder='再次輸入密碼'
+              required
+            />
+            <div class='invalid-feedback'>
+              密碼不相符!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class='btn btn-primary w-100 py-2' type='submit'>
+        Register
+      </button>
+      <p class='mt-2'>
+        Already have an account?
+        <a href='/users/login'>Log in</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<script src='/js/script.js'></script>

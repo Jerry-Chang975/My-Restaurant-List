@@ -53,50 +53,56 @@
 
 <!-- restaurant list -->
 <div class='container mt-5' style='max-width: 1000px'>
-  <div id='restaurant-container' class='d-flex justify-content-start flex-wrap'>
-    {{#each restaurants as |restaurant|}}
-      <div class='card mb-3'>
-        <a href='/restaurants/{{restaurant.id}}'><img
-            class='card-img-top'
-            src='{{restaurant.image}}'
-            alt='{{restaurant.name}}'
-          />
-        </a>
-        <div class='card-body p-3'>
-          <h6 class='card-title mb-1'>{{restaurant.name}}</h6>
+  {{#if restaurants.length}}
+    <div id='restaurant-container' class='d-flex justify-content-start flex-wrap'>
+      {{#each restaurants as |restaurant|}}
+        <div class='card mb-3'>
+          <a href='/restaurants/{{restaurant.id}}'><img
+              class='card-img-top'
+              src='{{restaurant.image}}'
+              alt='{{restaurant.name}}'
+            />
+          </a>
+          <div class='card-body p-3'>
+            <h6 class='card-title mb-1'>{{restaurant.name}}</h6>
 
-          <div class='restaurant-category mb-1'>
-            <i class='fas fa-utensils pr-2'></i>
-            {{restaurant.category}}
+            <div class='restaurant-category mb-1'>
+              <i class='fas fa-utensils pr-2'></i>
+              {{restaurant.category}}
+            </div>
+
+            <span class='badge rounded-pill bg-danger font-weight-normal'>
+              {{restaurant.rating}}
+              <i class='fas fa-star fa-xs'></i>
+            </span>
           </div>
-
-          <span class='badge rounded-pill bg-danger font-weight-normal'>
-            {{restaurant.rating}}
-            <i class='fas fa-star fa-xs'></i>
-          </span>
+          <div class='card-footer d-flex justify-content-end'>
+            <a
+              href='/restaurants/{{restaurant.id}}'
+              type='button'
+              class='btn btn-primary'
+            >Detail</a>
+            <a
+              href='/restaurants/{{restaurant.id}}/edit'
+              type='button'
+              class='btn btn-warning'
+            >Edit</a>
+            <form
+              class='remove-restaurant'
+              action='/restaurants/{{restaurant.id}}?_method=DELETE'
+              method='post'
+            >
+              <button type='submit' class='btn btn-danger'>Delete</button>
+            </form>
+          </div>
         </div>
-        <div class='card-footer d-flex justify-content-end'>
-          <a
-            href='/restaurants/{{restaurant.id}}'
-            type='button'
-            class='btn btn-primary'
-          >Detail</a>
-          <a
-            href='/restaurants/{{restaurant.id}}/edit'
-            type='button'
-            class='btn btn-warning'
-          >Edit</a>
-          <form
-            class='remove-restaurant'
-            action='/restaurants/{{restaurant.id}}?_method=DELETE'
-            method='post'
-          >
-            <button type='submit' class='btn btn-danger'>Delete</button>
-          </form>
-        </div>
-      </div>
-    {{/each}}
-  </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class='alert alert-warning text-center mx-auto w-50' role='alert'>
+      <h4>目前無任何餐廳資料，趕快去新增吧!!</h4>
+    </div>
+  {{/if}}
 </div>
 
 <script src='js/index-script.js'></script>
