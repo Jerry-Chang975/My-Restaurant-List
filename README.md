@@ -68,13 +68,13 @@ This web application allows you to:
 3. Run database migrations
 
    ```bash
-   npx sequelize db:migrate
+   npm run migration
    ```
 
 4. Add seed data
 
    ```bash
-   npx sequelize db:seed:all
+   npm run seed
    ```
 
 ### OAuth2 App Configuration
