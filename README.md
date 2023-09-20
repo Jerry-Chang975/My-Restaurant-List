@@ -81,7 +81,7 @@ This web application allows you to:
 
 1.  GO to [Meta for Developers](https://developers.facebook.com/apps) to set up the OAuth2 configurations for your app.
 
-2.  After creating the app, copy the App ID and App Key to your .env file (you need to create this file yourself).
+2.  After creating the app, copy the App ID and App Key to your .env file (you need to create this file yourself by referring to .env.example).
 
 ### Start the Web App
 

@@ -1,3 +1,4 @@
+// This config will depend on NODE_ENV in app.js
 {
   "development": {
     "username": "username",
